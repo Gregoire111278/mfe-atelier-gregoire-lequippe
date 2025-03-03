@@ -1,6 +1,5 @@
-import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
-import { AppComponent } from './app/app.component';
+import { loadRemoteEntry } from '@angular-architects/module-federation';
 
-bootstrapApplication(AppComponent, appConfig)
-  .catch((err) => console.error(err));
+loadRemoteEntry({ type: 'module', remoteEntry: 'http://localhost:4201/remoteEntry.js' })
+  .then(() => import('./bootstrap'))
+  .catch(err => console.error('Error loading remote entries', err));
